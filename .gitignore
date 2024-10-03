@@ -1,0 +1,11 @@
+# Ignorar la carpeta de módulos de Node.js
+node_modules/
+
+# Ignorar los archivos generados de TypeScript
+dist/
+
+# Ignorar el archivo de variables de entorno
+.env
+
+# Ignorar el archivo de lock de npm
+package-lock.json
