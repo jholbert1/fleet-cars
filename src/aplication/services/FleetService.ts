@@ -12,4 +12,8 @@ export class FleetService {
   async findAllFleets(): Promise<Fleet[]> {
     return await this.fleetRepository.findAll();
   }
+
+  async findByName(nombre: string): Promise<Fleet | null> {
+    return await this.fleetRepository.findByName(nombre);
+  }
 }

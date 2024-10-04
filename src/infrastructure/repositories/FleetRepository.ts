@@ -15,4 +15,12 @@ export class FleetRepository implements IFleetRepository {
     const fleets = await FleetModel.find();
     return fleets.map((fleet) => new Fleet(fleet.nombre, fleet._id.toString()));
   }
+
+  async findByName(nombre: string): Promise<Fleet | null> {
+    const fleet = await FleetModel.findOne({ nombre });
+    if (fleet) {
+      return new Fleet(fleet.nombre, fleet._id.toString());
+    }
+    return null;
+  }
 }
