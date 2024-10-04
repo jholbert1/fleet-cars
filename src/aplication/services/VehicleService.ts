@@ -1,4 +1,5 @@
 import { Vehicle } from "../../domain/entities/Vehicle.js";
+import { PaginationOptions } from "../../domain/interfaces/PaginationOptions.js";
 import { IVehicleRepository } from "../../domain/repositories/IVehicleRepository.js";
 import FleetModel from "../../infrastructure/database/models/FleetModel.js";
 
@@ -15,14 +16,17 @@ export class VehicleService {
       data.modelo,
       data.año
     );
-    console.log("🚀 ~ VehicleService ~ fleetId:", fleetId)
 
     const vehicle = new Vehicle(data.marca, data.modelo, data.año, fleetId);
     return await this.vehicleRepository.create(vehicle);
   }
 
-  async findAllVehicles(): Promise<Vehicle[]> {
-    return await this.vehicleRepository.findAll();
+  async findAllVehicles(
+    paginationOptions: PaginationOptions
+  ): Promise<{ vehicles: Vehicle[]; total: number }> {
+    const vehicles = await this.vehicleRepository.findAll(paginationOptions);
+    const total = await this.vehicleRepository.count();
+    return { vehicles, total };
   }
 
   async findVehiclesByFleet(fleetId: string): Promise<Vehicle[]> {

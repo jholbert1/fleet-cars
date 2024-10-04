@@ -1,5 +1,6 @@
 import { Fleet } from "../../domain/entities/Fleet.js";
 import { Vehicle } from "../../domain/entities/Vehicle.js";
+import { PaginationOptions } from "../../domain/interfaces/PaginationOptions.js";
 import { IVehicleRepository } from "../../domain/repositories/IVehicleRepository.js";
 import { IFleetDocument } from "../database/interfaces/IFleetDocument.js";
 import VehicleModel from "../database/models/VehicleModel.js";
@@ -21,10 +22,14 @@ export class VehicleRepository implements IVehicleRepository {
     );
   }
 
-  // TODO delete this any
-  async findAll(): Promise<Vehicle[]> {
+  async findAll(paginationOptions: PaginationOptions): Promise<Vehicle[]> {
+    const { page, limit } = paginationOptions;
+    const skip = (page - 1) * limit;
+
     const vehicles = await VehicleModel.find()
       .populate<{ fleetId: IFleetDocument }>("fleetId")
+      .skip(skip)
+      .limit(limit)
       .exec();
 
     return vehicles.map((vehicleDoc) => {
@@ -60,5 +65,10 @@ export class VehicleRepository implements IVehicleRepository {
         vehicleDoc._id.toString()
       );
     });
+  }
+
+  async count(): Promise<number> {
+    const getCount = await VehicleModel.countDocuments().exec();
+    return getCount;
   }
 }
