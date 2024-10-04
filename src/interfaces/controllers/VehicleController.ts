@@ -1,4 +1,5 @@
 import { Request, Response } from "express";
+import { validationResult } from "express-validator";
 import { VehicleService } from "../../aplication/services/VehicleService.js";
 import { PaginationOptions } from "../../domain/interfaces/PaginationOptions.js";
 import { VehicleRepository } from "../../infrastructure/repositories/VehicleRepository.js";
@@ -8,6 +9,12 @@ const vehicleService = new VehicleService(vehicleRepository);
 export class VehicleController {
   static async createVehicle(req: Request, res: Response) {
     try {
+      const errors = validationResult(req);
+
+      if (!errors.isEmpty()) {
+        return res.status(400).json({ errors: errors.array() });
+      }
+
       const { marca, modelo, año } = req.body;
       const vehicle = await vehicleService.createVehicle({
         marca,
