@@ -15,6 +15,7 @@ export class VehicleService {
       data.modelo,
       data.año
     );
+    console.log("🚀 ~ VehicleService ~ fleetId:", fleetId)
 
     const vehicle = new Vehicle(data.marca, data.modelo, data.año, fleetId);
     return await this.vehicleRepository.create(vehicle);
@@ -22,6 +23,10 @@ export class VehicleService {
 
   async findAllVehicles(): Promise<Vehicle[]> {
     return await this.vehicleRepository.findAll();
+  }
+
+  async findVehiclesByFleet(fleetId: string): Promise<Vehicle[]> {
+    return await this.vehicleRepository.findByFleet(fleetId);
   }
 
   private async assignFleetToVehicle(

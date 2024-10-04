@@ -27,4 +27,15 @@ export class VehicleController {
       res.status(400).json({ error: error.message });
     }
   }
+
+  static async findByFleet(req: Request, res: Response) {
+    try {
+      const { fleetId } = req.params;
+
+      const vehicles = await vehicleService.findVehiclesByFleet(fleetId);
+      res.status(200).json(vehicles);
+    } catch (error: any) {
+      res.status(400).json({ error: error.message });
+    }
+  }
 }
