@@ -8,6 +8,7 @@ export class VehicleRepository implements IVehicleRepository {
       marca: vehicle.marca,
       modelo: vehicle.modelo,
       año: vehicle.año,
+      fleetId: vehicle.fleetId,
     });
     const savedVehicle = await createdVehicle.save();
     return new Vehicle(
@@ -18,16 +19,8 @@ export class VehicleRepository implements IVehicleRepository {
     );
   }
 
-  async findAll(): Promise<Vehicle[]> {
-    const vehicles = await VehicleModel.find();
-    return vehicles.map(
-      (vehicle) =>
-        new Vehicle(
-          vehicle.marca,
-          vehicle.modelo,
-          vehicle.año,
-          vehicle._id.toString()
-        )
-    );
+  // TODO delete this any
+  async findAll(): Promise<any[]> {
+    return await VehicleModel.find().populate("fleetId");
   }
 }

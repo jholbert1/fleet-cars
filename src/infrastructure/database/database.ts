@@ -1,11 +1,10 @@
-import mongoose from "mongoose";
 import dotenv from "dotenv";
+import mongoose from "mongoose";
 
 dotenv.config();
 
 const connectDB = async () => {
   try {
-    console.log("******************", process.env.DB_NAME)
     const dbHost = process.env.DB_HOST || "localhost";
     const dbPort = process.env.DB_PORT || "27017";
     const dbName = process.env.DB_NAME || "registro-carros";
