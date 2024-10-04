@@ -8,9 +8,5 @@ export class Vehicle {
     public fleetId?: string | null,
     public fleet?: Fleet,
     public id?: string
-  ) {
-    if (!marca || !modelo || !año || !fleetId) {
-      throw new Error("Marca, modelo, año y flota son obligatorios");
-    }
-  }
+  ) {}
 }

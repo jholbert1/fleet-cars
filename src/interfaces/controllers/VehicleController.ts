@@ -9,12 +9,12 @@ const vehicleService = new VehicleService(vehicleRepository);
 export class VehicleController {
   static async createVehicle(req: Request, res: Response) {
     try {
-      const errors = validationResult(req);
+      const validationsErrors = validationResult(req);
 
-      if (!errors.isEmpty()) {
-        return res.status(400).json({ errors: errors.array() });
+      if (!validationsErrors.isEmpty()) {
+        res.status(400).json({ errors: validationsErrors.array() });
+        return;
       }
-
       const { marca, modelo, año } = req.body;
       const vehicle = await vehicleService.createVehicle({
         marca,
