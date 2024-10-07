@@ -174,7 +174,7 @@ curl --location 'http://localhost:3000/api/fleets'
 ## Autor
 
 - **Nombre**: Jholbert
-- **Email**: jholbert.c@gmail.com
+- **Linkedin**: https://www.linkedin.com/in/jholbert-caro-874551126/
 
 ---
 
