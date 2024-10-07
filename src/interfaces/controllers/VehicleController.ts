@@ -15,11 +15,11 @@ export class VehicleController {
         res.status(400).json({ errors: validationsErrors.array() });
         return;
       }
-      const { marca, modelo, año } = req.body;
+      const { brand, carModel, year } = req.body;
       const vehicle = await vehicleService.createVehicle({
-        marca,
-        modelo,
-        año,
+        brand,
+        carModel,
+        year,
       });
       res.status(201).json(vehicle);
     } catch (error: any) {

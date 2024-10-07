@@ -12,12 +12,12 @@ const seedUsers = async () => {
 
     const users = [
       {
-        nombre: "Usuario Admin",
+        name: "Usuario Admin",
         email: "admin@example.com",
         password: await bcrypt.hash("admin123", 10),
       },
       {
-        nombre: "Usuario Normal",
+        name: "Usuario Normal",
         email: "user@example.com",
         password: await bcrypt.hash("user123", 10),
       },

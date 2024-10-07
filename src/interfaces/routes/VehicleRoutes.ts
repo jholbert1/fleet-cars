@@ -9,17 +9,17 @@ router.post(
   "/",
   authMiddleware,
   [
-    body("marca")
+    body("brand")
       .isString()
       .trim()
       .notEmpty()
-      .withMessage("La marca es obligatoria"),
-    body("modelo")
+      .withMessage("La brand es obligatoria"),
+    body("carModel")
       .isString()
       .trim()
       .notEmpty()
-      .withMessage("El modelo es obligatorio"),
-    body("año")
+      .withMessage("El carModel es obligatorio"),
+    body("year")
       .isInt({ min: 1886, max: new Date().getFullYear() + 1 })
       .withMessage("Año inválido para un vehículo"),
   ],

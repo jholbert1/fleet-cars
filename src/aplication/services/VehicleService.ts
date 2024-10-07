@@ -7,17 +7,17 @@ export class VehicleService {
   constructor(private vehicleRepository: IVehicleRepository) {}
 
   async createVehicle(data: {
-    marca: string;
-    modelo: string;
-    año: number;
+    brand: string;
+    carModel: string;
+    year: number;
   }): Promise<Vehicle> {
     const fleetId = await this.assignFleetToVehicle(
-      data.marca,
-      data.modelo,
-      data.año
+      data.brand,
+      data.carModel,
+      data.year
     );
 
-    const vehicle = new Vehicle(data.marca, data.modelo, data.año, fleetId);
+    const vehicle = new Vehicle(data.brand, data.carModel, data.year, fleetId);
     return await this.vehicleRepository.create(vehicle);
   }
 
@@ -34,35 +34,35 @@ export class VehicleService {
   }
 
   private async assignFleetToVehicle(
-    marca: string,
-    modelo: string,
-    año: number
+    brand: string,
+    carModel: string,
+    year: number
   ): Promise<string | null> {
     const rules = [
       {
-        condition: (marca: string, modelo: string, año: number) =>
-          marca === "Chevrolet" &&
-          año >= 2018 &&
-          ["Aveo", "Optra"].includes(modelo),
+        condition: (brand: string, carModel: string, year: number) =>
+          brand === "Chevrolet" &&
+          year >= 2018 &&
+          ["Aveo", "Optra"].includes(carModel),
         fleetName: "Espectacular",
       },
       {
-        condition: (marca: string, modelo: string, año: number) =>
-          marca === "Toyota" &&
-          año >= 2015 &&
-          ["Hilux", "Fortunner", "Prado"].includes(modelo),
+        condition: (brand: string, carModel: string, year: number) =>
+          brand === "Toyota" &&
+          year >= 2015 &&
+          ["Hilux", "Fortunner", "Prado"].includes(carModel),
         fleetName: "Pickup / Camioneta",
       },
     ];
 
     for (const rule of rules) {
-      if (rule.condition(marca, modelo, año)) {
-        const fleet = await FleetModel.findOne({ nombre: rule.fleetName });
+      if (rule.condition(brand, carModel, year)) {
+        const fleet = await FleetModel.findOne({ name: rule.fleetName });
         return fleet?._id.toString() || null;
       }
     }
 
-    const fleet = await FleetModel.findOne({ nombre: "Económico" });
+    const fleet = await FleetModel.findOne({ name: "Económico" });
     return fleet?._id.toString() || null;
   }
 }

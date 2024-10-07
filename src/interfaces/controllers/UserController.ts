@@ -14,10 +14,10 @@ export class UserController {
       return;
     }
 
-    const { nombre, email, password } = req.body;
+    const { name, email, password } = req.body;
 
     try {
-      const user = await userService.registerUser({ nombre, email, password });
+      const user = await userService.registerUser({ name, email, password });
       res
         .status(201)
         .json({ message: "Usuario registrado exitosamente", user });

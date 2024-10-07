@@ -16,7 +16,7 @@ export class UserService {
   }
 
   async registerUser(data: {
-    nombre: string;
+    name: string;
     email: string;
     password: string;
   }): Promise<User> {
@@ -27,7 +27,7 @@ export class UserService {
     }
 
     const hashedPassword = this.hashePassword(data.password);
-    const user = new User(data.nombre, data.email, hashedPassword);
+    const user = new User(data.name, data.email, hashedPassword);
     return this.userRepository.create(user);
   }
 

@@ -2,9 +2,9 @@ import { Fleet } from "./Fleet.js";
 
 export class Vehicle {
   constructor(
-    public marca: string,
-    public modelo: string,
-    public año: number,
+    public brand: string,
+    public carModel: string,
+    public year: number,
     public fleetId?: string | null,
     public fleet?: Fleet,
     public id?: string

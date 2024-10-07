@@ -7,7 +7,7 @@ const router = Router();
 router.post(
   "/register",
   [
-    body("nombre").not().isEmpty().withMessage("El nombre es obligatorio"),
+    body("name").not().isEmpty().withMessage("El name es obligatorio"),
     body("email").isEmail().withMessage("Debe proporcionar un email válido"),
     body("password")
       .isLength({ min: 6 })

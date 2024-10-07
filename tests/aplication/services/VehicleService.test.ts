@@ -31,27 +31,27 @@ describe("VehicleService", () => {
   test('should assign "Espectacular" fleet to eligible Chevrolet vehicles', async () => {
     (FleetModel.findOne as jest.Mock).mockResolvedValueOnce({
       _id: "fleetId1",
-      nombre: "Espectacular",
+      name: "Espectacular",
     });
 
     const vehicleData = {
-      marca: "Chevrolet",
-      modelo: "Aveo",
-      año: 2019,
+      brand: "Chevrolet",
+      carModel: "Aveo",
+      year: 2019,
     };
 
     vehicleRepositoryMock.create.mockResolvedValueOnce(
       new Vehicle(
-        vehicleData.marca,
-        vehicleData.modelo,
-        vehicleData.año,
+        vehicleData.brand,
+        vehicleData.carModel,
+        vehicleData.year,
         "fleetId1"
       )
     );
 
     const result = await vehicleService.createVehicle(vehicleData);
 
-    expect(FleetModel.findOne).toHaveBeenCalledWith({ nombre: "Espectacular" });
+    expect(FleetModel.findOne).toHaveBeenCalledWith({ name: "Espectacular" });
     expect(vehicleRepositoryMock.create).toHaveBeenCalled();
     expect(result.fleetId).toBe("fleetId1");
   });
@@ -59,20 +59,20 @@ describe("VehicleService", () => {
   test('should assign "Pickup / Camioneta" fleet to eligible Toyota vehicles', async () => {
     (FleetModel.findOne as jest.Mock).mockResolvedValueOnce({
       _id: "fleetId2",
-      nombre: "Pickup / Camioneta",
+      name: "Pickup / Camioneta",
     });
 
     const vehicleData = {
-      marca: "Toyota",
-      modelo: "Hilux",
-      año: 2016,
+      brand: "Toyota",
+      carModel: "Hilux",
+      year: 2016,
     };
 
     vehicleRepositoryMock.create.mockResolvedValueOnce(
       new Vehicle(
-        vehicleData.marca,
-        vehicleData.modelo,
-        vehicleData.año,
+        vehicleData.brand,
+        vehicleData.carModel,
+        vehicleData.year,
         "fleetId2"
       )
     );
@@ -80,7 +80,7 @@ describe("VehicleService", () => {
     const result = await vehicleService.createVehicle(vehicleData);
 
     expect(FleetModel.findOne).toHaveBeenCalledWith({
-      nombre: "Pickup / Camioneta",
+      name: "Pickup / Camioneta",
     });
     expect(vehicleRepositoryMock.create).toHaveBeenCalled();
     expect(result.fleetId).toBe("fleetId2");
@@ -89,27 +89,27 @@ describe("VehicleService", () => {
   test('should assign "Económico" fleet to vehicles that do not meet other criteria', async () => {
     (FleetModel.findOne as jest.Mock).mockResolvedValueOnce({
       _id: "fleetId3",
-      nombre: "Económico",
+      name: "Económico",
     });
 
     const vehicleData = {
-      marca: "Ford",
-      modelo: "Fiesta",
-      año: 2014,
+      brand: "Ford",
+      carModel: "Fiesta",
+      year: 2014,
     };
 
     vehicleRepositoryMock.create.mockResolvedValueOnce(
       new Vehicle(
-        vehicleData.marca,
-        vehicleData.modelo,
-        vehicleData.año,
+        vehicleData.brand,
+        vehicleData.carModel,
+        vehicleData.year,
         "fleetId3"
       )
     );
 
     const result = await vehicleService.createVehicle(vehicleData);
 
-    expect(FleetModel.findOne).toHaveBeenCalledWith({ nombre: "Económico" });
+    expect(FleetModel.findOne).toHaveBeenCalledWith({ name: "Económico" });
     expect(vehicleRepositoryMock.create).toHaveBeenCalled();
     expect(result.fleetId).toBe("fleetId3");
   });

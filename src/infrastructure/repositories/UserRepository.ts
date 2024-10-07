@@ -5,14 +5,14 @@ import UserModel from "../database/models/UserModel.js";
 export class UserRepository implements IUserRepository {
   async create(user: User): Promise<User> {
     const createdUser = new UserModel({
-      nombre: user.nombre,
+      name: user.name,
       email: user.email,
       password: user.password,
     });
 
     const savedUser = await createdUser.save();
     return new User(
-      savedUser.nombre,
+      savedUser.name,
       savedUser.email,
       savedUser.password,
       savedUser._id.toString()
@@ -25,7 +25,7 @@ export class UserRepository implements IUserRepository {
       return null;
     }
     return new User(
-      userDoc.nombre,
+      userDoc.name,
       userDoc.email,
       userDoc.password,
       userDoc._id.toString()

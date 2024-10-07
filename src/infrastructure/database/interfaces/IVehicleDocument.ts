@@ -3,8 +3,8 @@ import { IFleetDocument } from "./IFleetDocument.js";
 
 export interface IVehicleDocument extends Document {
   _id: Types.ObjectId;
-  marca: string;
-  modelo: string;
-  año: number;
+  brand: string;
+  carModel: string;
+  year: number;
   fleetId: Types.ObjectId | IFleetDocument;
 }

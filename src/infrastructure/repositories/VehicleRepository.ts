@@ -8,16 +8,16 @@ import VehicleModel from "../database/models/VehicleModel.js";
 export class VehicleRepository implements IVehicleRepository {
   async create(vehicle: Vehicle): Promise<Vehicle> {
     const createdVehicle = new VehicleModel({
-      marca: vehicle.marca,
-      modelo: vehicle.modelo,
-      año: vehicle.año,
+      brand: vehicle.brand,
+      carModel: vehicle.carModel,
+      year: vehicle.year,
       fleetId: vehicle.fleetId,
     });
     const savedVehicle = await createdVehicle.save();
     return new Vehicle(
-      savedVehicle.marca,
-      savedVehicle.modelo,
-      savedVehicle.año,
+      savedVehicle.brand,
+      savedVehicle.carModel,
+      savedVehicle.year,
       savedVehicle._id.toString()
     );
   }
@@ -34,12 +34,12 @@ export class VehicleRepository implements IVehicleRepository {
 
     return vehicles.map((vehicleDoc) => {
       const fleetData = vehicleDoc.fleetId as IFleetDocument;
-      const fleet = new Fleet(fleetData.nombre, fleetData._id.toString());
+      const fleet = new Fleet(fleetData.name, fleetData._id.toString());
 
       return new Vehicle(
-        vehicleDoc.marca,
-        vehicleDoc.modelo,
-        vehicleDoc.año,
+        vehicleDoc.brand,
+        vehicleDoc.carModel,
+        vehicleDoc.year,
         fleet.id,
         fleet,
         vehicleDoc._id.toString()
@@ -54,12 +54,12 @@ export class VehicleRepository implements IVehicleRepository {
 
     return vehicles.map((vehicleDoc) => {
       const fleetData = vehicleDoc.fleetId as IFleetDocument;
-      const fleet = new Fleet(fleetData.nombre, fleetData._id.toString());
+      const fleet = new Fleet(fleetData.name, fleetData._id.toString());
 
       return new Vehicle(
-        vehicleDoc.marca,
-        vehicleDoc.modelo,
-        vehicleDoc.año,
+        vehicleDoc.brand,
+        vehicleDoc.carModel,
+        vehicleDoc.year,
         fleet.id,
         fleet,
         vehicleDoc._id.toString()
