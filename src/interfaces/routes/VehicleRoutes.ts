@@ -1,11 +1,13 @@
 import { Router } from "express";
 import { body, param, query } from "express-validator";
 import { VehicleController } from "../controllers/VehicleController.js";
+import { authMiddleware } from "../middleware/authMiddleware.js";
 
 const router = Router();
 
 router.post(
   "/",
+  authMiddleware,
   [
     body("marca")
       .isString()
@@ -26,6 +28,7 @@ router.post(
 
 router.get(
   "/",
+  authMiddleware,
   [
     query("page")
       .optional()
@@ -41,6 +44,7 @@ router.get(
 
 router.get(
   "/:fleetId",
+  authMiddleware,
   [
     param("fleetId")
       .isMongoId()
