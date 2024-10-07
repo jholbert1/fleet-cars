@@ -14,13 +14,13 @@ const seedFleets = async () => {
     const fleetService = new FleetService(fleetRepository);
 
     const fleetsData = [
-      { nombre: "Pickup / Camioneta" },
-      { nombre: "Espectacular" },
-      { nombre: "No tan caro" },
+      { name: "Pickup / Camioneta" },
+      { name: "Espectacular" },
+      { name: "No tan caro" },
     ];
 
     for (const data of fleetsData) {
-      const existingFleet = await fleetService.findByName(data.nombre);
+      const existingFleet = await fleetService.findByName(data.name);
       if (!existingFleet) {
         await fleetService.createFleet(data);
       }

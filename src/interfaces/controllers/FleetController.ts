@@ -7,8 +7,8 @@ const fleetService = new FleetService(fleetRepository);
 export class FleetController {
   static async createFleet(req: Request, res: Response) {
     try {
-      const { nombre } = req.body;
-      const vehicle = await fleetService.createFleet({ nombre });
+      const { name } = req.body;
+      const vehicle = await fleetService.createFleet({ name });
       res.status(201).json(vehicle);
     } catch (error: any) {
       res.status(400).json({ error: error.message });

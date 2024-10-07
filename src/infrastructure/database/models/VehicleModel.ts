@@ -1,10 +1,12 @@
-import { Schema, Types, model } from "mongoose";
+import { Schema, model } from "mongoose";
+import { IVehicleDocument } from "../interfaces/IVehicleDocument.js";
 
-const VehicleSchema = new Schema({
-  marca: { type: String, required: true },
-  modelo: { type: String, required: true },
-  año: { type: Number, required: true },
-  fleetId: { type: Types.ObjectId, ref: "Fleet", required: true },
+const VehicleSchema = new Schema<IVehicleDocument>({
+  brand: { type: String, required: true },
+  carModel: { type: String, required: true },
+  year: { type: Number, required: true },
+  fleetId: { type: Schema.Types.ObjectId, ref: "Fleet", required: true },
 });
 
-export default model("Vehicle", VehicleSchema);
+const VehicleModel = model<IVehicleDocument>("Vehicle", VehicleSchema);
+export default VehicleModel;
