@@ -79,6 +79,14 @@ npm run start
 
 Este comando levantará el servidor en `http://localhost:3000`.
 
+### 6. Pruebas Unitarias
+
+Para correr las pruebas unitarias puedes correr el siguiente comando
+
+```bash
+npm run test
+```
+
 ---
 
 ## Rutas de la API
@@ -159,6 +167,7 @@ curl --location 'http://localhost:3000/api/fleets'
 - **`npm run build`**: Compila el proyecto.
 - **`npm run seed:users`**: Ejecuta el seed para cargar usuarios predefinidos en la base de datos.
 - **`npm run seed:fleet`**: Ejecuta el seed para cargar las flotas predefinidas en la base de datos.
+- **`npm run test`**: Corre las pruebas unitarias.
 
 ---
 
