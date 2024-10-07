@@ -62,7 +62,7 @@ export class VehicleService {
       }
     }
 
-    const fleet = await FleetModel.findOne({ name: "Económico" });
+    const fleet = await FleetModel.findOne({ name: "No tan caro" });
     return fleet?._id.toString() || null;
   }
 }
