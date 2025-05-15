@@ -48,7 +48,21 @@ DB_NAME=fleet-cars
 JWT_SECRET=defaultSecret
 ```
 
-### 4. Correr el seed de usuarios y flotas
+### 4. Verifica la conexión a MongoDB
+
+Asegúrate de que el servicio de MongoDB esté corriendo correctamente y que los datos de conexión en el archivo `.env` sean correctos. Si la base de datos no está disponible o la cadena de conexión es incorrecta, la API no podrá conectarse y mostrará un error. Puedes iniciar MongoDB localmente con:
+
+```bash
+# En sistemas basados en Unix
+sudo service mongod start
+
+# En Windows (si tienes MongoDB como servicio)
+net start MongoDB
+```
+
+Si usas una instancia remota, asegúrate de que la URL y las credenciales sean correctas.
+
+### 5. Correr el seed de usuarios y flotas
 
 El proyecto incluye dos seeds para pre-cargar la base de datos con usuarios y flotas:
 
@@ -69,7 +83,7 @@ npm run seed:fleet
 npm run seed:users
 ```
 
-### 5. Iniciar el servidor
+### 6. Iniciar el servidor
 
 Para iniciar el servidor de desarrollo, puedes ejecutar:
 
@@ -79,7 +93,7 @@ npm run start
 
 Este comando levantará el servidor en `http://localhost:3000`.
 
-### 6. Pruebas Unitarias
+### 7. Pruebas Unitarias
 
 Para correr las pruebas unitarias puedes correr el siguiente comando
 
